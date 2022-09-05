@@ -18,9 +18,9 @@ public class FileChannelDemo {
 
         buffer.clear();
 
-        // 向文件内追加内容：祝源码班各位大帅比迎娶白富美！
+        // 向文件内追加内容：lalalalala！
         buffer.put("\r\n".getBytes());
-        buffer.put("祝源码班各位大帅比迎娶白富美！".getBytes());
+        buffer.put("lalalalala！".getBytes());
 
         buffer.flip();
 
