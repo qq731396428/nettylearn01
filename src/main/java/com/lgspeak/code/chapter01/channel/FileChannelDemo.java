@@ -8,7 +8,7 @@ import java.nio.channels.FileChannel;
 public class FileChannelDemo {
     public static void main(String[] args) throws IOException {
         // 这里的"rw"是指支持读和写
-        RandomAccessFile randomAccessFile = new RandomAccessFile("C:\\Users\\Administrator\\Desktop\\data.txt","rw");
+        RandomAccessFile randomAccessFile = new RandomAccessFile("C:\\Users\\韩明轩\\Desktop\\根据roi计算补贴金额入参.txt","rw");
         FileChannel fileChannel = randomAccessFile.getChannel();
 
         // 读取文件内容：
@@ -18,9 +18,9 @@ public class FileChannelDemo {
 
         buffer.clear();
 
-        // 向文件内追加内容：祝源码班各位大帅比迎娶白富美！
+        // 向文件内追加内容：lalalalala！
         buffer.put("\r\n".getBytes());
-        buffer.put("祝源码班各位大帅比迎娶白富美！".getBytes());
+        buffer.put("lalalalala！".getBytes());
 
         buffer.flip();
 
