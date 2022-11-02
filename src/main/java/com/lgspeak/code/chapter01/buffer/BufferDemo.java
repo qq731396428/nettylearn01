@@ -14,7 +14,7 @@ public class BufferDemo {
     }
 
     public static void createBuffer() {
-        //每个 Buffer 实现类都提供了一个静态方法 allocate(int capacity) 帮助我们快速实例化一个 Buffer。
+        //每个 Buffer 实现类都提供了一个静态方法 allocate(int capacity) 帮助我们快速实例化一个 Buffer。11
         //如：
         ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
         IntBuffer intBuf = IntBuffer.allocate(1024);
