@@ -1,4 +1,4 @@
-package com.lgspeak.code.chapter01.channel;
+package com.code.chapter01NIO.channel;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

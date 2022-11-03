@@ -1,4 +1,4 @@
-package com.lgspeak.code.chapter01.buffer;
+package com.code.chapter01NIO.buffer;
 
 
 import java.io.IOException;
@@ -8,6 +8,11 @@ import java.nio.LongBuffer;
 import java.nio.channels.SocketChannel;
 
 
+/**
+ * 明确概念：Buffer是运输器，channel是通道，最终通道可以通过 channel.intwrite(Buffer) 方法，将Buffer里的数据写入通道  intread方法可以吧channel数据写到buffer中
+ * 想从channel读数据的话，Buffer是写模式
+ *
+ * **/
 public class BufferDemo {
     public static void main(String[] args) {
         compactBuffer();

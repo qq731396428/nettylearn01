@@ -1,4 +1,4 @@
-package com.lgspeak.code.chapter01.selector;
+package com.code.chapter01NIO.selector;
 
 import java.io.IOException;
 import java.nio.channels.SelectionKey;
@@ -16,6 +16,7 @@ public class SelectorDemo {
         // 如何将Channel注册到selector呢？
         // 1.需要将channel设置成为非阻塞模式，因为默认Channel都是阻塞模式。
         // 2.注册，并且设置感兴趣的事件
+        //3. 可以被选择的channel需要继承 SelectableChannel类
         // 伪代码...假设当前是服务端代码，通过clientChannel获取一个客户端channel
         SocketChannel socketChannel = clientChannel();
         socketChannel.configureBlocking(false);
@@ -27,7 +28,7 @@ public class SelectorDemo {
         // 3. OP_CONNECT：   1 << 3 =  0000 0000 0000 0000 0000 0000 0000 1000
         // 4. OP_ACCEPT：    1 << 4 =  0000 0000 0000 0000 0000 0000 0001 0000
 
-        // 如果即想监听通道的 可读 且 又想监听通道的 可写，怎么做？
+        // 如果即想监听通道的 可读 且 又想监听通道的 可写，怎么做？  使用 | 位运算符
         //0000 0000 0000 0000 0000 0000 0000 0001
         // |
         //0000 0000 0000 0000 0000 0000 0000 0100
