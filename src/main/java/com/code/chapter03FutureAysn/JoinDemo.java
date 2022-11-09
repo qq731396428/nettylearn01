@@ -7,6 +7,20 @@ package com.code.chapter03FutureAysn;
  * 那么，A线程进入阻塞，直到B线程执行完成
  *
  */
+
+/**
+ * join的使用场景：A线程调用B线程的join，等待B线程执行完；B线程没有完成之前，A线程阻塞
+ * join的三种重载：
+ * void join() : A线程等待B线程执行结束后，A线程重新恢复执行
+ * void join(long mills) A线程等待B线程执行，如果等待超过了mills毫秒的话，不论B是否结束，A线程都会恢复执行
+ * void join(long mills，int nanos) 同上，等待时间为mills毫秒+nanos纳秒
+ */
+
+/**
+ * join是实例方法，不是静态方法
+ * join调用时，不是线程所指向的目标线程阻塞，二十当前线程阻塞
+ * 当前线程需要等到阻塞结束
+ */
 public class JoinDemo {
     public static final int SLEEP_GAP=500;
 
@@ -24,6 +38,9 @@ public class JoinDemo {
                 System.out.println("洗水壶");
                 System.out.println("管好凉水");
                 System.out.println("放在火上");
+                //睡一下，代表烧水
+                Thread.sleep(SLEEP_GAP);
+                System.out.println("水开了");
             }catch (Exception e){
 
             }
