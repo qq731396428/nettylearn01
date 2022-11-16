@@ -47,4 +47,25 @@ public class NettyReactorDemo {
      *    从ChannelOutboundHandler通道出站处理器到通道的某次IO操作，例如：在程序完成业务处理后，可以通过ChannelOutboundHandler通道出站处理器处理的结果写入底层通道。常用write()方法
      * 这两个业务处理接口的默认实现：ChannelInboundHandlerAdapter，ChannelOutboundHandlerAdapter。
      */
+
+    /**
+     * Netty的流水线 pipeline
+     * 首先，netty的反应器模式中各个组件之间的关系：
+     * （1）反应器（或SubReactor子反应器）和通道之间是一对多的关系：一个反应器可以查询很多个通道的IO事件。
+     * （2）通道和Handler处理器实例之间，是多对多的关系：一个通道的IO事件被多个的Handler实例处理；一个Handler处理器实例也能绑定到很多的通道，处理多个通道的IO事件
+     *   然后：通道和Handler处理器实例之间的绑定关系，netty是如何组织的呢？
+     *   答：netty设计了一个特殊的组件，叫作ChannelPipeline（通道流水线），他像一条管道，将绑定到一个通道的多个Handler处理器实例，串在一起，形成一条流水线。
+     *      channelPipeline（通道流水线）的默认实现，实际上被设计成一个双向链表。所有的Handler处理器实例被包装成了双向链表的节点，加入到了ChannelPipeline中
+     *   ps:一个Netty通道拥有一条Handler处理器流水线，成员的名称叫做Pipeline
+     *   问：pipeLine不是“管道”而是“流水线”的原因
+     *   答：与流水线内部的Handler处理器之间处理IO事件的先后次序有关
+     *   例：以入站处理为例：每一个来自通道的IO事件，都会进入一次ChannelPipeline通道流水线。在进入第一个Handler后，这个IO事件将会按照既定规则“从前向后”流向下一个Handler处理器，向后流动的过程中会有3种情况：
+     *   （1）如果后面 还有 其他Handler入站处理器，那么IO事件可以交给下一个Handler处理器，向后流动
+     *   （2）如果后面 没有 其他的入站处理器，这就意味着这个IO事件在此次流水线中的处理结束了
+     *   （3）如果流水线中间需要“终止流动”，可以选择不将IO事件交给下一个Handler处理器，流水线的执行也被终止。
+     *   结论：
+     *   （1）入站处理器Handler的执行次序，从前到后；出站处理，从后到前
+     *   （2）入站操作只会从Inbound入站处理器的Handler流过；出站的IO操作只能从OutBound出站处理器类型的Handler流过。pipeline是管家，handler是小弟
+     *
+     */
 }
