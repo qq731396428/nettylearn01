@@ -42,6 +42,21 @@ public class NettyBootStrapDemo {
  *
  */
 
+/**
+ * ChannelOption通道选项
+ * NioServerSocket父通道、NioSocketChannel子通道类型，都可以设置一系列ChannelOption选项。
+ * SO_RCVBUF,SO_SNDBUF：为TCP参数，每一个TCP_Socket套接字在内核中都有一个“发送缓冲区”和“接收缓冲区”，这两个选项就是用来设置TCP连接的这两个缓冲区大小的。TCP的全双工工作模式以及TCP的滑动窗口便是依赖这两个独立缓冲区及其填充的状态
+ * TCP_NODELAY：此为TCP参数。表示立即发送数据，默认为True（netty默认true--即发送小报文，操作系统为false）。该值用于设置Nagle算法的启用，该算法将小的碎片数据连接成更大的报文（或数据包）来最小化所发送报文的数量，如果需要发送一些较小的报文，则需要金庸该算发。
+ * SO_KEEPALIVE：此为tcp参数。表示底层TCP协议的心跳机制。true为连接保持心跳，“默认为false”。启用该功能时，TCP会主动探测空闲连接的有效性，默认的心跳间隔7200s-2小时
+ * SO_REUSEADDR：tcp参数。设置为true时表示“地址复用”，默认为false
+ * SO_LINGER：tcp参数，表示关闭socket的延时事件，默认-1，表示禁用该功能（即socket.close()后立即返回）
+ * SO_BACKLOG：tcp参数。表示服务器端接受连接的队列长度，如果队列已满，客户端的连接会被拒绝，默认linux128，windows200。
+ * SO_BROADCAST：tcp参数，设置广播模式
+ *
+ *
+ */
+
+
     /**
      * Bootstrap的启动流程
      */
@@ -110,7 +125,7 @@ public class NettyBootStrapDemo {
         //如果要阻塞当前线程直到通道关闭，可以使用通道的closeFuture() 方法，以获取通道关闭的异步任务。当通道被关闭时，closeFuture实例的sync()方法会返回
 
         /**
-         * 关闭EventLoopGroup
+         * 8.关闭EventLoopGroup
          */
         //释放掉所有资源，包括创建的反应器线程
         workerLoopGroup.shutdownGracefully();
