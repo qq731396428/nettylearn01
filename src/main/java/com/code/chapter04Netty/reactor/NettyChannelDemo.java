@@ -21,6 +21,11 @@ public class NettyChannelDemo {
 
 /**
  * EmbeddedChannel嵌入式通道
+ * 通信的基础工作，netty已经完成。netty提供了一个专用通道，EmbeddedChannel 嵌入式通道
+ * EmbeddedChannel 仅仅是模拟入站和出站的操作，底层不进行实际的传输，不需要启动netty服务器和客户端。使用它可以快速进行ChannelHandler业务处理器的单元测试：
+ * （1）writeInbound：入站数据写到通道：测试入站处理器。调用这个方法，向EmbeddedChannel 写入一个二进制ByteBuf数据包，模拟底层入站包：向通道写入outbound出站数据，模拟通道发送数据，这些写入的数据会被流水线上的出站处理器处理
+ * （2）readOutBound：读取出站数据：从EmbeddedChannel 中读取数据，返回经过流水线最后一个出站处理器处理之后的出站数据。如果没有数据，返回null
+ *
  *
  */
 
