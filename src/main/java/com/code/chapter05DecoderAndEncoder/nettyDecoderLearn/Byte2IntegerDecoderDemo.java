@@ -2,7 +2,6 @@ package com.code.chapter05DecoderAndEncoder.nettyDecoderLearn;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.ByteToMessageCodec;
 import io.netty.handler.codec.ByteToMessageDecoder;
 
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
  * （2）实现父类的decode方法，将缓冲书数据解码成一个一个的Integer对象。
  * （3）在decode方法中，将解码后得到的Integer整数，加入到父类传递过来的List 实参中
  */
-public class NettyDecoderIntegerDemo extends ByteToMessageDecoder {
+public class Byte2IntegerDecoderDemo extends ByteToMessageDecoder {
 
     /**
      * 解码器：
