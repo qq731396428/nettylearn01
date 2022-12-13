@@ -29,7 +29,7 @@ public class Byte2IntegerReplayingDecoderDemo extends ReplayingDecoder {
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
         int i=in.readInt();
         System.out.println("解码出一个整数");
-        out.add(i)
+        out.add(i);
 
     }
 
