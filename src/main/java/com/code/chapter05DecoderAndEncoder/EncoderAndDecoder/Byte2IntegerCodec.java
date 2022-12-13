@@ -16,7 +16,7 @@ public class Byte2IntegerCodec extends ByteToMessageCodec<Integer> {
 
     @Override
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf in, List<Object> out) throws Exception {
-        for(in.readableBytes()>=4){
+        while(in.readableBytes()>=4){
             int i=in.readInt();
             System.out.println("decoder ="+i);
             out.add(i);
