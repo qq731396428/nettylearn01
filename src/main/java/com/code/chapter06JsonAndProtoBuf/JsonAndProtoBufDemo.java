@@ -1,5 +1,13 @@
 package com.code.chapter06JsonAndProtoBuf;
 
+import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.EventLoopGroup;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.handler.codec.protobuf.ProtobufDecoder;
+import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
+
 public class JsonAndProtoBufDemo {
 
     /**
@@ -26,7 +34,29 @@ public class JsonAndProtoBufDemo {
      * 微信采用Protobuf
      * 需要生命：头部声明：proto版本（例 proto3）；java选项配置：option java_package="包名" option java_outer_classname="MsgProtos"  ；消息定义：message MSG{ uint32 id=1;string content=2}
      */
-    public static void msgProtos(){
+    ServerBootstrap b=new ServerBootstrap();
+    public void runServer(){
+        //创建反应器线程组
+        EventLoopGroup bossLoopGroup=new NioEventLoopGroup(1);
+        EventLoopGroup workerLoopGroup=new NioEventLoopGroup();
+        try{
+            //..省略：启动器的反应器线程，设置配置项
+            //5 装配子通道流水线
+            b.childHandler(new ChannelInitializer<SocketChannel>() {
+                //有连接到达时会创建一个通道
+                @Override
+                protected void initChannel(SocketChannel ch) throws Exception {
+                    // 流水线管理子通道中的Handler业务处理器
+                    //向子通道流水线添加3个Handler业务处理器
+                    ch.pipeline().addLast(new ProtobufVarint32FrameDecoder());
+                    //ch.pipeline().addLast(new ProtobufDecoder(MsgProtos.Msg.get));
+                }
+            });
+
+        }catch (Exception e){
+
+        }
+
 
 
     }

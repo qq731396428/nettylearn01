@@ -29,6 +29,7 @@ public class SingleReactor implements Runnable{
     public static void main(String[] args) {
     }
 
+    @Override
     public void run() {
         //选择器轮询
         try{
